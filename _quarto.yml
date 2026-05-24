@@ -1,0 +1,52 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Мастер-классы. Геоинформационные системы"
+  page-footer: |
+        © 2026, Татьяна Балтыжакова
+  navbar:
+    left:
+      - href: index.qmd
+        text: Лекции
+    #  - sidebar:practice
+    #  - href: homework.qmd
+     #   text: Домашнее задание
+      
+    right: 
+      - href: https://t.me/geomess
+        icon: telegram
+      - icon: github
+        href: https://github.com/baltti/gis-hse   
+      
+ # sidebar:
+ #   - id: practice
+  #    pinned: true
+ #     align: center
+ #     title: "Практикум"
+ #     style: "docked"
+ #     collapse-level: 1
+ #     contents:
+ #       - start.qmd
+  #      - basics.qmd
+   #     - project.qmd
+    #    - osm.qmd
+#        - style.qmd
+ #       - crs.qmd
+  #      - layout.qmd
+   #     - spatial.qmd
+      #  - thematic mapping.qmd
+       # - georeferencing.qmd
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: true
+    
+lang: ru-RU    
+language: custom.yml
+
+editor: visual
+
