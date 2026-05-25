@@ -3,6 +3,7 @@ project:
   output-dir: docs
 
 website:
+  favicon: "images/icon_small.png"
   title: "Мастер-классы. Геоинформационные системы"
   page-footer: |
         © 2026, Татьяна Балтыжакова
@@ -10,7 +11,7 @@ website:
     left:
       - href: index.qmd
         text: Лекции
-    #  - sidebar:practice
+      - sidebar:practice
     #  - href: homework.qmd
      #   text: Домашнее задание
       
@@ -20,28 +21,29 @@ website:
       - icon: github
         href: https://github.com/baltti/gis-hse   
       
- # sidebar:
- #   - id: practice
-  #    pinned: true
- #     align: center
- #     title: "Практикум"
- #     style: "docked"
- #     collapse-level: 1
- #     contents:
- #       - start.qmd
+  sidebar:
+    - id: practice
+      pinned: true
+      align: center
+      title: "Практикум"
+      style: "docked"
+      collapse-level: 1
+      contents:
+        - start.qmd
   #      - basics.qmd
    #     - project.qmd
     #    - osm.qmd
 #        - style.qmd
  #       - crs.qmd
+       # - georeferencing.qmd
   #      - layout.qmd
    #     - spatial.qmd
       #  - thematic mapping.qmd
-       # - georeferencing.qmd
+
 
 format:
   html:
-    theme: flatly
+    theme: litera
     css: styles.css
     toc: true
     

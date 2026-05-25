@@ -4,11 +4,10 @@ date: today
 date-format: "D MMMM YYYY"
 number-sections: true
 author:
-  - affiliation: Институт дизайна и урбанистики, Университет ИТМО 
-    name: Балтыжакова Татьяна
+  - name: Балтыжакова Татьяна
 ---
 
-## Преподаватель курса {.unnumbered}
+## Преподаватель {.unnumbered}
 
 [Балтыжакова Татьяна Игоревна](https://edu.itmo.ru/ru/lecturers_and_professors/329024), кандидат технических наук, доцент Института дизайна и урбанистики.
 
@@ -33,19 +32,3 @@ author:
 ```
 
 [Открыть в новой вкладке](https://baltti.github.io/gis-hse/02-data-models.html){target="_blank"}
-
-# Системы координат
-
-```{=html}
-<iframe src="https://baltti.github.io/gis-hse/03-coordinate-reference-systems.html" width="800" height="400"></iframe>
-```
-
-[Открыть в новой вкладке](https://baltti.github.io/gis-hse/03-coordinate-reference-systems.html){target="_blank"}
-
-# Способы визуализации пространственных данных
-
-```{=html}
-<iframe src="https://baltti.github.io/gis-hse/04-visualisation.html" width="800" height="400"></iframe>
-```
-
-[Открыть в новой вкладке](https://baltti.github.io/gis-hse/04-visualisation.html){target="_blank"}
