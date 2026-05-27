@@ -9,7 +9,7 @@ website:
         © 2026, Татьяна Балтыжакова
   navbar:
     left:
-      - href: index.qmd
+      - href: lectures.qmd
         text: Лекции
       - sidebar:practice
     #  - href: homework.qmd
