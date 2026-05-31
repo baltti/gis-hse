@@ -179,9 +179,7 @@ title: "Работа с OSM"
 -   OSMInfo - <https://docs.nextgis.ru/docs_ngqgis/source/osminfo.html>;
 
 ```{=html}
-<video width="800" height="600" controls>
-  <source src="https://rutube.ru/play/embed/5b0a57611a033d523fdd3887e9cf808b/" type="video/mp4">
-</video>
+<iframe width="720" height="405" src="https://rutube.ru/play/embed/5b0a57611a033d523fdd3887e9cf808b/" style="border: none;" allow="clipboard-write; autoplay" allowFullScreen></iframe>
 ```
 
 -   OSM AI Agent - https://github.com/ShogoHirasawa/OSM-AI (требует API ключ от OpenAI).
