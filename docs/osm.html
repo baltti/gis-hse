@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -102,6 +102,22 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./start.html">
  <span class="dropdown-text">Установка программы</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./basics.html">
+ <span class="dropdown-text">Начало работы</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./project.html">
+ <span class="dropdown-text">Проект в QGIS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./georeferencing.html">
+ <span class="dropdown-text">Привязка растров и векторизация</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./osm.html">
+ <span class="dropdown-text">Работа с OSM</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -122,10 +138,57 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./osm.html">Работа с OSM</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./start.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Установка программы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Начало работы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Проект в QGIS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./georeferencing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Привязка растров и векторизация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./osm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Работа с OSM</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -137,6 +200,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#структура-данных-osm" id="toc-структура-данных-osm" class="nav-link" data-scroll-target="#структура-данных-osm">Структура данных OSM</a></li>
   <li><a href="#сервис-overpass-turbo" id="toc-сервис-overpass-turbo" class="nav-link" data-scroll-target="#сервис-overpass-turbo">Сервис overpass-turbo</a></li>
   <li><a href="#модуль-quickosm" id="toc-модуль-quickosm" class="nav-link" data-scroll-target="#модуль-quickosm">Модуль QuickOSM</a></li>
+  <li><a href="#дополнительные-модули" id="toc-дополнительные-модули" class="nav-link" data-scroll-target="#дополнительные-модули">Дополнительные модули</a></li>
+  <li><a href="#использование-готового-скрипта" id="toc-использование-готового-скрипта" class="nav-link" data-scroll-target="#использование-готового-скрипта">Использование готового скрипта</a></li>
+  <li><a href="#загрузка-выгрузок-по-регионам" id="toc-загрузка-выгрузок-по-регионам" class="nav-link" data-scroll-target="#загрузка-выгрузок-по-регионам">Загрузка выгрузок по регионам</a></li>
   <li><a href="#загрузка-всех-объектов-в-заданных-границах" id="toc-загрузка-всех-объектов-в-заданных-границах" class="nav-link" data-scroll-target="#загрузка-всех-объектов-в-заданных-границах">Загрузка всех объектов в заданных границах</a></li>
   <li><a href="#osm-gpt" id="toc-osm-gpt" class="nav-link" data-scroll-target="#osm-gpt">OSM-GPT</a></li>
   </ul></li>
@@ -360,6 +426,46 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="images/clipboard-2944901746.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
+</section>
+<section id="дополнительные-модули" class="level2">
+<h2 class="anchored" data-anchor-id="дополнительные-модули">Дополнительные модули</h2>
+<ul>
+<li><p>ohsomeTools - https://github.com/GIScience/ohsome-qgis-plugin;</p></li>
+<li><p>OSMDownloader - https://github.com/lcoandrade/OSMDownloader;</p></li>
+<li><p>HCMGIS - https://github.com/opengeoshub/HCMGIS (выгрузка данных от geofabrik напрямую в программе);</p></li>
+<li><p>OSMInfo - <a href="https://docs.nextgis.ru/docs_ngqgis/source/osminfo.html" class="uri">https://docs.nextgis.ru/docs_ngqgis/source/osminfo.html</a>;</p></li>
+</ul>
+<video width="800" height="600" controls="">
+  <source src="https://rutube.ru/play/embed/5b0a57611a033d523fdd3887e9cf808b/" type="video/mp4">
+</video>
+<ul>
+<li>OSM AI Agent - https://github.com/ShogoHirasawa/OSM-AI (требует API ключ от OpenAI).</li>
+</ul>
+</section>
+<section id="использование-готового-скрипта" class="level2">
+<h2 class="anchored" data-anchor-id="использование-готового-скрипта">Использование готового скрипта</h2>
+<p>Для этого способа вам потребуется установка модуля Kolba (<a href="https://github.com/pavelpereverzev/kolba" class="uri">https://github.com/pavelpereverzev/kolba</a>), который позволяет запускать стронние скрипты в программе.</p>
+<p>Интерфейс Колбы довольно простой: в верхней части находится панель управления и строка пути к папке со скриптами.</p>
+<p>В строке пути есть кнопки:</p>
+<ul>
+<li><p><a href="https://camo.githubusercontent.com/4cae908caba11a6ba1dab2cf034c0481f33dac0aad5804be441ea090e0a8299b/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f64726f70646f776e2e706e67"><img src="https://camo.githubusercontent.com/4cae908caba11a6ba1dab2cf034c0481f33dac0aad5804be441ea090e0a8299b/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f64726f70646f776e2e706e67.png" class="img-fluid" alt="Table loook"></a> - выбор сохраненных путей</p></li>
+<li><p><a href="https://camo.githubusercontent.com/5fa6f6f639222e1a95a348b7674a5689675762e2fce7cc769a0208b73cd4be85/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f726566726573682e706e67"><img src="https://camo.githubusercontent.com/5fa6f6f639222e1a95a348b7674a5689675762e2fce7cc769a0208b73cd4be85/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f726566726573682e706e67.png" class="img-fluid" alt="Table loook"></a> - обновление списка скриптом в текущей папке</p></li>
+<li><p><a href="https://camo.githubusercontent.com/ad7b606919a2bc4ef55c6f24e61eb33677686715d4d7d36193338d293e2523cb/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f7765627363726970742e706e67"><img src="https://camo.githubusercontent.com/ad7b606919a2bc4ef55c6f24e61eb33677686715d4d7d36193338d293e2523cb/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f7765627363726970742e706e67.png" class="img-fluid" alt="Table loook"></a> - загрузка скриптов из интернета</p></li>
+<li><p><a href="https://camo.githubusercontent.com/9c2906cd9727dbd78d1f10760c2f3d8278a195daef71dc8a7b6a560b7f8cded2/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f666f6c6465725f73656c6563742e706e67"><img src="https://camo.githubusercontent.com/9c2906cd9727dbd78d1f10760c2f3d8278a195daef71dc8a7b6a560b7f8cded2/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f6c696e655f666f6c6465725f73656c6563742e706e67.png" class="img-fluid" alt="Table loook"></a> - выбор папки</p></li>
+</ul>
+<p>Ниже расположены два блока: слева — список скриптов, справа — описание выбранного скрипта. В дополнение к стандартным (открепить/закрепить, закрыть виджет) кнопкам в заголовке:</p>
+<ul>
+<li><p><a href="https://camo.githubusercontent.com/612284e8d8186e35e4e9bebc2b63965c7d0fe6788a67adbdc35a34efa70a5731/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f69636f6e5f666f6c6465725f6f6e2e706e67"><img src="https://camo.githubusercontent.com/612284e8d8186e35e4e9bebc2b63965c7d0fe6788a67adbdc35a34efa70a5731/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f69636f6e5f666f6c6465725f6f6e2e706e67.png" class="img-fluid" alt="Table loook"></a> - показать/скрыть строку пути</p></li>
+<li><p><a href="https://camo.githubusercontent.com/78327225b8a540f30ac583b1747b7321e4bc7afbbc457cc8df0945768d5112ec/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f706174685f6c6973742e706e67"><img src="https://camo.githubusercontent.com/78327225b8a540f30ac583b1747b7321e4bc7afbbc457cc8df0945768d5112ec/68747470733a2f2f676973776f726b732e72752f716769735f746f6f6c732f696d672f706174685f6c6973742e706e67.png" class="img-fluid" alt="Table loook"></a> - открыть настройки Колба.</p></li>
+</ul>
+<p>Скрипт для загрузки называется <strong>de_osm</strong> (его можно найти в поиске модуля).</p>
+<p><img src="images/clipboard-480828205.png" class="img-fluid"></p>
+</section>
+<section id="загрузка-выгрузок-по-регионам" class="level2">
+<h2 class="anchored" data-anchor-id="загрузка-выгрузок-по-регионам">Загрузка выгрузок по регионам</h2>
+<p>На портале Geofabrik <a href="https://download.geofabrik.de/" class="uri">https://download.geofabrik.de/</a> вы можете загрузить данные сразу для всего континента, страны или части страны.</p>
+<p>Кроме того, этот портал позволяет вам пользоваться историческими выгрузками данных на нужную вам дату.</p>
+<p>Наиболее оптимальным для вас будет загрузка архивов <strong>.gpkg.zip</strong> для нужного вам региона. После их распаковки вы получите файл в формате geopackage, в отдельных слоях которого будут содержаться определенные объекты.</p>
 </section>
 <section id="загрузка-всех-объектов-в-заданных-границах" class="level2">
 <h2 class="anchored" data-anchor-id="загрузка-всех-объектов-в-заданных-границах">Загрузка всех объектов в заданных границах</h2>

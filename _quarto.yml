@@ -30,12 +30,13 @@ website:
       collapse-level: 1
       contents:
         - start.qmd
-  #      - basics.qmd
-   #     - project.qmd
-    #    - osm.qmd
+        - basics.qmd
+        - project.qmd
+        - georeferencing.qmd
+        - osm.qmd
 #        - style.qmd
  #       - crs.qmd
-       # - georeferencing.qmd
+
   #      - layout.qmd
    #     - spatial.qmd
       #  - thematic mapping.qmd
