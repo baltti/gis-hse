@@ -12,6 +12,20 @@ title: "Привязка растров и векторизация"
 
 Создадим новый проект (рекомендую либо сразу его создавать в системе координат `EPSG:3857`, либо сразу после создания перепроецировать на лету в эту систему координат).
 
+::: callout-note
+## Где можно найти исторические карты
+
+Для того, чтобы найти оцифрованные оригиналы исторических карт, вы можете воспользоваться следующими ресурсами:
+
+-   David Rumsey map collection <https://www.davidrumsey.com/>
+
+-   Retromap <https://retromap.ru/select>
+
+-   Портал Русского географического общества <https://geoportal.rgo.ru/collections>
+
+-   фонд картографических изданий РНБ <https://nlr.ru/nlr_visit/RA1918/fond-kartograficheskih-izdaniy>
+:::
+
 Для геопривязки растровых изображений в QGIS существует встроенный инструмент [Привязка растров](https://docs.qgis.org/3.28/en/docs/user_manual/working_with_raster/georeferencer.html) (может называться Геопривязка).
 
 ![](images/clipboard-3288554198.png){fig-align="center" width="433"}
@@ -96,6 +110,14 @@ title: "Привязка растров и векторизация"
 ![](images/clipboard-3551943149.png){fig-align="center"}
 
 -   *georeference with 2 points* - одноременное перемещение, вращение и масштабирование растра для привязки по двум контрольным точкам.
+:::
+
+::: callout-caution
+Если вы будете осуществлять геопривязку исторических карт, то, скорее всего, вы не достигните высокой точности.
+
+Возможно, вы получите значительные искажения.
+
+![Vaienti, B., di Lenardo, I., & Kaplan, F. (2025). Georeferencing historical maps using local feature matching and Delaunay consistency. Cartography and Geographic Information Science, 1–23. https://doi.org/10.1080/15230406.2025.2566789](images/clipboard-1473862559.png){fig-align="center" width="1000"}
 :::
 
 # Автоматическая векторизация

@@ -265,6 +265,25 @@ window.Quarto = {
 <p><strong>Геопривязка растра</strong> - это присвоение растровому изображению нужной географической системы координат.</p>
 <p>В процессе привязки на растровом изображении для каждого пикселя, у которого есть условные координаты на растре, находится соотвествующая координата в целевой системе координат.</p>
 <p>Создадим новый проект (рекомендую либо сразу его создавать в системе координат <code>EPSG:3857</code>, либо сразу после создания перепроецировать на лету в эту систему координат).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Где можно найти исторические карты
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Для того, чтобы найти оцифрованные оригиналы исторических карт, вы можете воспользоваться следующими ресурсами:</p>
+<ul>
+<li><p>David Rumsey map collection <a href="https://www.davidrumsey.com/" class="uri">https://www.davidrumsey.com/</a></p></li>
+<li><p>Retromap <a href="https://retromap.ru/select" class="uri">https://retromap.ru/select</a></p></li>
+<li><p>Портал Русского географического общества <a href="https://geoportal.rgo.ru/collections" class="uri">https://geoportal.rgo.ru/collections</a></p></li>
+<li><p>фонд картографических изданий РНБ <a href="https://nlr.ru/nlr_visit/RA1918/fond-kartograficheskih-izdaniy" class="uri">https://nlr.ru/nlr_visit/RA1918/fond-kartograficheskih-izdaniy</a></p></li>
+</ul>
+</div>
+</div>
 <p>Для геопривязки растровых изображений в QGIS существует встроенный инструмент <a href="https://docs.qgis.org/3.28/en/docs/user_manual/working_with_raster/georeferencer.html">Привязка растров</a> (может называться Геопривязка).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -393,6 +412,26 @@ window.Quarto = {
 <ul>
 <li><em>georeference with 2 points</em> - одноременное перемещение, вращение и масштабирование растра для привязки по двум контрольным точкам.</li>
 </ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если вы будете осуществлять геопривязку исторических карт, то, скорее всего, вы не достигните высокой точности.</p>
+<p>Возможно, вы получите значительные искажения.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1473862559.png" class="img-fluid figure-img" width="1000"></p>
+<figcaption>Vaienti, B., di Lenardo, I., &amp; Kaplan, F. (2025). Georeferencing historical maps using local feature matching and Delaunay consistency. Cartography and Geographic Information Science, 1–23. https://doi.org/10.1080/15230406.2025.2566789</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </section>
