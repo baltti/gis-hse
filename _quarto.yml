@@ -12,8 +12,8 @@ website:
       - href: lectures.qmd
         text: Лекции
       - sidebar:practice
-    #  - href: homework.qmd
-     #   text: Домашнее задание
+      - href: assignment.qmd
+        text: Задание по мастер-классам
       
     right: 
       - href: https://t.me/geomess
