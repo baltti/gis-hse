@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru-RU" xml:lang="ru-RU"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Основные операции пространственного анализа – Мастер-классы. Геоинформационные системы</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./images/f500324b-79dc-418c-8bc3-a397a43e3278.jpg" rel="icon" type="image/jpeg">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-bd7c1f6e67d8733bfcdf5ca412ca6326.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Мастер-классы. Геоинформационные системы</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./lectures.html"> 
+<span class="menu-text">Лекции</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Практикум</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="./start.html">
+ <span class="dropdown-text">Установка программы</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./basics.html">
+ <span class="dropdown-text">Начало работы</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./project.html">
+ <span class="dropdown-text">Проект в QGIS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./georeferencing.html">
+ <span class="dropdown-text">Привязка растров и векторизация</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./osm.html">
+ <span class="dropdown-text">Работа с OSM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./crs.html">
+ <span class="dropdown-text">Работа с системами координат</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./spatial.html">
+ <span class="dropdown-text">Основные операции пространственного анализа</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./style.html">
+ <span class="dropdown-text">Общие настройки стиля объектов</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./thematic mapping.html">
+ <span class="dropdown-text">Визуализация пространственных данных</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./assignment.html"> 
+<span class="menu-text">Задание по мастер-классам</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/geomess"> <i class="bi bi-telegram" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/baltti/gis-hse"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spatial.html">Основные операции пространственного анализа</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./start.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Установка программы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Начало работы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Проект в QGIS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./georeferencing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Привязка растров и векторизация</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./osm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Работа с OSM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./crs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Работа с системами координат</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Основные операции пространственного анализа</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./style.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Общие настройки стиля объектов</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./thematic mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Визуализация пространственных данных</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#расчет-площадей-объектов" id="toc-расчет-площадей-объектов" class="nav-link active" data-scroll-target="#расчет-площадей-объектов">Расчет площадей объектов</a></li>
+  <li><a href="#создание-буферных-зон" id="toc-создание-буферных-зон" class="nav-link" data-scroll-target="#создание-буферных-зон">Создание буферных зон</a></li>
+  <li><a href="#поиск-объектов-по-расположению" id="toc-поиск-объектов-по-расположению" class="nav-link" data-scroll-target="#поиск-объектов-по-расположению">Поиск объектов по расположению</a>
+  <ul class="collapse">
+  <li><a href="#определение-зданий-попавших-в-границы-буферных-зон" id="toc-определение-зданий-попавших-в-границы-буферных-зон" class="nav-link" data-scroll-target="#определение-зданий-попавших-в-границы-буферных-зон">Определение зданий, попавших в границы буферных зон</a></li>
+  </ul></li>
+  <li><a href="#пространственное-агрегирование" id="toc-пространственное-агрегирование" class="nav-link" data-scroll-target="#пространственное-агрегирование">Пространственное агрегирование</a>
+  <ul class="collapse">
+  <li><a href="#расчет-количества-доступных-школ" id="toc-расчет-количества-доступных-школ" class="nav-link" data-scroll-target="#расчет-количества-доступных-школ">Расчет количества доступных школ</a></li>
+  <li><a href="#расчет-коэффицента-застройки" id="toc-расчет-коэффицента-застройки" class="nav-link" data-scroll-target="#расчет-коэффицента-застройки">Расчет коэффицента застройки</a>
+  <ul class="collapse">
+  <li><a href="#использование-пространственного-объединения" id="toc-использование-пространственного-объединения" class="nav-link" data-scroll-target="#использование-пространственного-объединения">Использование пространственного объединения</a></li>
+  <li><a href="#использование-функций-агрегирования" id="toc-использование-функций-агрегирования" class="nav-link" data-scroll-target="#использование-функций-агрегирования">Использование функций агрегирования</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Основные операции пространственного анализа</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В этом разделе и далее мы будем использовать преимущественно слой в системе координат UTM в нужной вам зоне.</p>
+</div>
+</div>
+<section id="расчет-площадей-объектов" class="level1">
+<h1>Расчет площадей объектов</h1>
+<p>Для расчета площади зданий воспользуемся калькулятором полей в таблице атрибутов.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Напоминание
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Таблица атрибутов может быть открыта из контекстного меню слоя.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2477555248.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="526"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Расчет площади мы будем осуществлять в том слое, который вы получили по итогам перепроецирования: слой в системе координат UTM.</p>
+</div>
+</div>
+<p>В открывшейся таблице атрибутов вы увидите собственную панель инструментов, на которой вам нужен калькулятор полей.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1045039255.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2158"></p>
+</figure>
+</div>
+<p>В открывшемся окне калькулятора полей вам нужно создать новое поле с типом данных “десятичное число”, в которое будет записан ваш результат.</p>
+<p>Для расчета площади необходима будет одна из функций из группы <strong>Геометрия</strong>: <code>area()</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-485574753.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1489"></p>
+</figure>
+</div>
+<p>Само выражение:</p>
+<pre><code>area ($geometry)</code></pre>
+<p>Что значит аргумент <code>$geometry</code> в скобках?</p>
+<p>Это говорит о том, что для расчета будет использована не какая-то конкретная геометрия одного объекта, а все геометрии слоя.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Обратите внимание, что у нас есть две функции для расчета площади:</p>
+<ul>
+<li><p><code>$area</code> - расчет площади осуществляется в <em>системе координат проекта на эллипсоиде</em>;</p></li>
+<li><p><code>area()</code> - расчет площади осуществляется в <em>системе координат слоя на плоскости</em>.</p></li>
+</ul>
+<p>Мы используем здесь второй вариант, так как нам необходим расчет именно в системе координат слоя. Для этого мы его и перепроецировали.</p>
+</div>
+</div>
+<p>В результате вычисления вы получите новое поле, в которое будет записана площадь.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2007705995.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="961"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+На заметку
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В нашем случае площадь будет рассчитана в квадратных метрах, так как мы использовали систему координат слоя, в которой единицами измерения являются метры.</p>
+<p>Это площадь застройки здания, то есть площадь по контуру первого этажа.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Дополнительно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вы можете аналогично рассчитать периметр здания, воспользовавшись функцией <code>perimeter</code>.</p>
+<p>Общая площадь здания может быть рассчитана как произведение уже рассчитаной вами площади и количества этажей.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2704296193.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="728"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+На заметку
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вы можете указать это выражение в свойствах слоя в пункте <em>Формы полей</em>, тогда при создании нового объекта площадь для него будет рассчитаваться автоматически.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2535272035.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1253"></p>
+</figure>
+</div>
+<p>Это будет работать для любого вашего вычисляемого поля.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Дополнительно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Для простоты вычислений вы также можете воспользоваться модулем <strong>Calculate geometry</strong>.</p>
+<p>Он будет доступен в контекстном меню слоя.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2969958452.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="695"></p>
+</figure>
+</div>
+<p>Модуль позволяет вычислять основные геометрические параметры без использования выражений и калькулятора полей.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3626026141.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1037"></p>
+</figure>
+</div>
+<p>Кроме того, здесь вы можете в явном виде выбирать в какой системе координат и как осуществлять вычисления (на плоскости или на эллипсоиде).</p>
+</div>
+</div>
+</section>
+<section id="создание-буферных-зон" class="level1">
+<h1>Создание буферных зон</h1>
+<p>Буферная зона - это область на карте, каждая точка внутри которой находится в пределах заданного расстояния от исходного объекта.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1352830376.png" class="img-fluid figure-img" width="1576"></p>
+<figcaption>Источник: Shen, J.; Chen, L.; Wu, Y.; Jing, N. Approach to Accelerating Dissolved Vector Buffer Generation in Distributed In-Memory Cluster Architecture. ISPRS Int. J. Geo-Inf. 2018, 7, 26. https://doi.org/10.3390/ijgi7010026</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Буферные зоны - это один из тех инструментов, которые зависимы от системы координат исходного слоя. То есть размер буфера может быть задан только в единицах измерения слоя.</p>
+</div>
+</div>
+<p>Для создания буферных зон есть одноименный инструмент <em>Буферизация</em> в панели инструментов анализа.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2295926105.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="856"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Дополнительно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Как видите, у нас есть несколько очень похожих инструментов, мы с вами будем пользоваться самым простым из них.</p>
+<p>Что же делают остальные?</p>
+<ul>
+<li><p>буфер переменной ширины - размер буферной зоны будет зависеть от величины какого-то показателя;</p></li>
+<li><p>множественный буфер - создание сразу нескольких буферных зон с определенным шагом по расстоянию;</p></li>
+<li><p>конические буферы (на самом деле клиновидные) - буфер для линейного объекта с разными значениями размера в начале и конце линии;</p></li>
+<li><p>односторонний буфер - создание буфера только с одной стороны линейного объекта;</p></li>
+<li><p>создать клиновидные буферы - создание буферов в форме сектора круга от точечных объектов.</p></li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3630713758.png" class="img-fluid figure-img" width="574"></p>
+<figcaption>Источник: https://help.axioma-gis.ru/index.html?editing_buffer.html</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1072641176.png" class="img-fluid figure-img" width="574"></p>
+<figcaption>Источник: https://help.axioma-gis.ru/index.html?editing_buffer.html</figcaption>
+</figure>
+</div>
+<p>В качестве размера буферной зоны мы воспользуемся основным градостроительным нормативом доступности для школ - 500 метров до жилых зданий.</p>
+<p>Если вы использовали другие объекты, то вы можете взять другое расстояние.</p>
+<p>Например, для детских садов зона доступности - 300 метров, для поликлиник - 1000 метров.</p>
+<p>Для объектов коммерческой инфраструктуры нормативов нет, но вы можете взять свое произвольное значение.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1525116501.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1520"></p>
+</figure>
+</div>
+<p>Так как в нашем случае буферные зоны строятся для точечных объектов, то основным параметром будет расстояние - размер зоны.</p>
+<p>Также роль будет играть параметр <em>Выполнить слияние результирующих полигонов</em>: при его выборе все полученные полигоны будут объединены в один объект.</p>
+<p>Если вы хотите сразу сохранить свой слой без создания временного файла, то вы можете нажать на кнопку <img src="images/clipboard-4068957659.png" class="img-fluid" width="55"> и выбрать пункт <em>Сохранить в файл</em>, после чего выбрать место для сохранения и указать имя файла.</p>
+<p>В итоге вы увидите новый слой в панели слоев и его отображение на карте.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2114513451.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1088"></p>
+</figure>
+</div>
+</section>
+<section id="поиск-объектов-по-расположению" class="level1">
+<h1>Поиск объектов по расположению</h1>
+<section id="определение-зданий-попавших-в-границы-буферных-зон" class="level2">
+<h2 class="anchored" data-anchor-id="определение-зданий-попавших-в-границы-буферных-зон">Определение зданий, попавших в границы буферных зон</h2>
+<p>Далее мы можем осуществить поиск домов, которые попадают в заданные области обслуживания.</p>
+<p>Для поиска объектов есть группа инструментов <strong>Вектор — Выборка</strong>.</p>
+<p>Часть инструментов в ней начинается со слова <em>Выбрать (Выделить)</em>, а часть - <em>Извлечь</em>. Разница между ними в том, что в первом случае объекты просто выделяются в исходном слое, а во втором - объекты, соответствующие заданным условия, извлекаются в новый слой.</p>
+<p>Краткое описания инструментов:</p>
+<ul>
+<li><p><em>выбрать/извлечь по атрибуту</em> - поиск объектов по значению одного из атрибутов;</p></li>
+<li><p><em>выбрать/извлечь по выражению</em> - поиск объектов по значениям нескольких атрибутов одновременно;</p></li>
+<li><p><em>выбрать/извлечь по пространственному отношению</em> - поиск объектов по их расположению относительно объектов другого слоя;</p></li>
+<li><p><em>выделить/извлечь в пределах расстояния</em> - поиск объектов в пределах заданного расстояния от других объектов;</p></li>
+<li><p><em>случайное выделение/случайное извлечение</em> - случайная выборка объектов из слоя (заданного числа объектов или заданного процента объектов);</p></li>
+<li><p><em>случайное выделение в подмножествах/случайное извлечение в подмножествах</em> - сначала слой разбивается по категориям по одному из атрибутов, потом из каждой категории извлекается заданное число или заданный процент объектов.</p></li>
+</ul>
+<p>Нам нужно определить, какие здания попадают в буферные зоны, поэтому нужно воспользоваться <strong>выбрать\извлечь по пространственному отношению</strong>.</p>
+<p>Для выбора объектов нужно сначала указать в каком слое осуществляется поиск (слой со зданиями), геометрический оператор (как объекты расположены относительно объектов другого слоя) и слой для сравнения (буферные зоны). Геометрические операторы в данном случае лучше выбирать <em>Пересекает</em> и <em>Находится внутри</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-126608668.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1514"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Геометрические предикаты показывают пространственные отношения между объектами<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1413833587.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3448253562.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-23097189.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2097404550.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1739071462.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3024917096.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-4157359843.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="776"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>По результатам извлечения вы получите новый слой, который будет содержать только здания, удовлетворяющие заданным условиям.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-4146872066.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1119"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Дополнительно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Инструмент <em>Выбрать по расположению</em> работает аналогично, но результатом у вас будет не просто новый слой, а выделенный набор объектов в текущем слое.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Дополнительно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Такеж вы можете попробовать найти здания в пределах заданного расстояния от школ при помощи инструментов <em>Выделить в пределах расстояния/Извлечение в пределах расстояния</em>.</p>
+<p>Однако следует помнить, что расстояние будет определяться в системе координат проекта, поэтому будет отличаться от того, что получено при помощи буферных зон.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="пространственное-агрегирование" class="level1">
+<h1>Пространственное агрегирование</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+На заметку
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Возможность пространственного агрегирования может быть реализована как минимум двумя способами: с использованием инструментов панели анализа и с испольованием функции агрегирования в калькуляторе полей.</p>
+<p>В панели инструментов анализа есть две функции: <em>Объединение атрибутов по расположению</em> и <em>Объединение атрибутов по расположению (сводка</em>). Первая из них присваивает значение атрибута одних векторных объектов другим на основе их взаимного расположения относительно друг друга. Например, у нас есть слой со зданиями и слой с магазинами, у которых есть атрибут с названием, мы можем с использованием этой функции присвоить зданию название магазина, который в нем расположен.</p>
+<p>Сводка позволяет получить не просто значение атрибута, а его статистическую сводку (среднее, медиану, максимальное и минимальное значения и прочее).</p>
+</div>
+</div>
+<section id="расчет-количества-доступных-школ" class="level2">
+<h2 class="anchored" data-anchor-id="расчет-количества-доступных-школ">Расчет количества доступных школ</h2>
+<p>Рассчитаем число доступных школ для каждого из наших зданий с использованием выражения агрегирования.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3012975634.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1621"></p>
+</figure>
+</div>
+<pre><code> aggregate( 'school_bufer_f66eb7f4_5fbc_470a_acf4_0fd3649f38e1', aggregate:='count',expression:="osm_id", filter:=within(geometry(@parent),@geometry))</code></pre>
+<p>Как видите, выражение очень похоже на то, что мы уже использовали, меняются только некоторые аргументы.</p>
+<p>Во-первых, используется другой тип агрегирования - <code>count</code>, то есть подсчет количества; во-вторых, используется другое выражение фильтрации - в этом случае мы ищем объекты исходного слоя, <em>попавшие внутрь буферных зон</em>.</p>
+<p>По итогам расчета получен новый атрибут, в котором указано количество школ, находящееся в радиусе доступности.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1515118183.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2209"></p>
+</figure>
+</div>
+</section>
+<section id="расчет-коэффицента-застройки" class="level2">
+<h2 class="anchored" data-anchor-id="расчет-коэффицента-застройки">Расчет коэффицента застройки</h2>
+<p>Что такое коэффициент застройки?</p>
+<p>Это отношение площади, занятой зданиями, к общей площади квартала или иной территориальной единицы.</p>
+<p><span class="math display">\[
+Коэффициент\space застройки = \dfrac{Площадь\space здания}{Площадь \space квартала}
+\]</span></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Здесь используется площадь здания по наземному контуру, то есть по первому этажу.</p>
+</div>
+</div>
+<section id="использование-пространственного-объединения" class="level3">
+<h3 class="anchored" data-anchor-id="использование-пространственного-объединения">Использование пространственного объединения</h3>
+<p>Наиболее просытм способом расчета здесь будет использование одной из функций <em>Панели инструментов анализа</em> - <em>Объединение атрибутов по расположению (сводка)</em>. Эта функция позволяет присваивать одним векторным объектам агрегированное значение атрибута других векторных объектов на основе их расположения относительно друг друга.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2923347169.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="418"></p>
+</figure>
+</div>
+<p>Как вы наверняка заметили у нас есть два варианта этой функции: просто <em>Объединение атрибутов по расположению</em> и <em>(сводка)</em>.</p>
+<p>Первая из них присваивает значение атрибута одних векторных объектов другим на основе их взаимного расположения относительно друг друга. Например, у нас есть слой со зданиями и слой с магазинами, у которых есть атрибут с названием, мы можем с использованием этой функции присвоить зданию название магазина, который в нем расположен.</p>
+<p>Сводка позволяет получить не просто значение атрибута, а его статистическую сводку (среднее, медиану, максимальное и минимальное значения и прочее).</p>
+<p>В первую очередь необходимо выбрать, какой слой будет использован в качестве исходного, а из какого будут присоединены атрибуты.</p>
+<p>В нашем случае мы будем присоединять атрибуты к объектам слоя с кварталами, а в качестве источника присоединяемых атрибутов будем использовать здания.</p>
+<p><img src="images/clipboard-1901251046.png" class="img-fluid"></p>
+<p>При использовании этого инструмента вам не обязательно брать слои, находящиеся в одной системе координат. Здесь системы координат значений иметь не будут.</p>
+<p>Кроме того необходимо выбрать геометрический предикат, то есть как должны быть расположены объекты присоединяемого слоя по отношению к объектам исходного слоя.</p>
+<p>В нашем случае <strong>кварталы содержат в себе здания</strong>, то есть нужный нам предикат - <em>содержит</em>.</p>
+<p>Далее необходимо выбрать поле для составления сводки. Если вы этого не сделаете, то будут использованы все поля присоединяемого слоя.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2259279289.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1409"></p>
+</figure>
+</div>
+<p>Вам необходимо выбрать поле, в котором была рассчитана площадь вашего здания.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3818564217.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="954"></p>
+</figure>
+</div>
+<p>Для возврата обратно в основное окно инструмента нужно нажать на кнопку <img src="images/clipboard-1733080035.png" class="img-fluid" width="37">.</p>
+<p>Если вы не выберете сводку для расчета, то инструмент попытается рассчитать все сводки, которые сможет.</p>
+<p>Нам с вами нужна суммарная площадь зданий в каждом квартале.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-579494345.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1268"></p>
+</figure>
+</div>
+<p>Что значит параметр <em>Отбросить записи, которые не могут быть объединены</em>? Если вы поставите напротив него галочку, то при объединении объектов у вас в итоговый слой не попадат кварталы, в которых нет ни одного здания, то есть те объекты исходного слоя, для которых не нашлось соответствия в слое присоединяемом.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Обратите внимание, что вам снова предалагают сохранить результат в качестве временного слоя. Вы можете выбрать опцию сохранить в файл.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Перед тем, как выполнять эту операцию, не забудьте сохранить изменения в вашем слое с кварталами, так как, если вы этого не сделаете, у вас будет пустой атрибут <em>fid</em>, что приведет к ошибке в расчетах.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Дополнительно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Скорее всего при выполнении расчетов вы увидите предупреждение о том, что у вашего слоя нет пространственного индекса и это может привести к более медленным расчетам.</p>
+<p>Это влияет только на скорость выполнения операции.</p>
+</div>
+</div>
+<p>В итоге вы получите новый слой, который выглядит как ваш исходный слой с кварталами, но в атрибутивной таблице которого содержится поле с суммарной площадью зданий внутри квартала.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2523458576.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1612"></p>
+</figure>
+</div>
+<p>Далее вы можете воспользоваться калькулятором полей для того, чтобы рассчитать коэффициент застройки квартала.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3822729774.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1385"></p>
+</figure>
+</div>
+<pre><code>"площадь_sum" / area( $geometry) * 100</code></pre>
+</section>
+<section id="использование-функций-агрегирования" class="level3">
+<h3 class="anchored" data-anchor-id="использование-функций-агрегирования">Использование функций агрегирования</h3>
+<p>Тот же самый расчет можно осуществить сразу в таблице атрибутов ваших кварталов в два или даже один шаг.</p>
+<p>Для этого воспользуемся функцией агрегирования <code>aggregate</code>, которая возвращает агрегированное значение с использованием объектов другого слоя.</p>
+<p>Эта функция является очень гибкой и фактически заменяет оба упомянутых выше инструмента <em>Объединение атрибутов по расположению</em> и <em>Объединение атрибутов по расположению (сводка)</em>.</p>
+<p><img src="images/clipboard-3074514937.png" class="img-fluid"></p>
+<pre><code>aggregate('apartments_UTM_bc6f07c9_7eab_4ca8_87d2_c2e029436076', 
+ aggregate:='sum',expression:="площадь", 
+ filter:=contains(geometry(@parent),@geometry))</code></pre>
+<p>Рассмотрим функцию подробнее.</p>
+<p>Первым аргументом функции указывается название слоя, который будет использоваться для агрегирования (присоединяемый слой). Проще всего выбрать нужный вам слой двойным кликом в группе <em>Слои карты</em> (аналогично тому, как вы выбираете название поля для расчетов в калькуляторе полей).</p>
+<p>Далее идет указание того, какой тип агрегирования должен быть использован. У нас с вами - это <code>sum</code>, то есть сумма.</p>
+<p>Следующий аргумент - <code>expression</code>, который указывает, какое поле необходимо агрегировать. Здесь вам нужно будет прописать название поля самостоятельно.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Обратите внимание, что в этой функции название поля указывается в двойных кавычках, а название слоя для агрегирования - в одинарных.</p>
+</div>
+</div>
+<p>Последний используемый нами аргумент функции -<code>filter</code> предназначен для фильтрации объектов, то есть здесь он будет указывать на пространственные отношения между нашим исходным слоем и присоединяемым. <code>geometry(@parent)</code> в данном случае указывает на геометрию нашего исходного слоя, а <code>@geometry</code> - на геометрию присоединяемого слоя.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Не забудьте в функции заменить название слоя на ваше (первый аргумент в скобках) и название поля на то, которое у вас (в двойных кавычках после аргумента <code>expression</code>.</p>
+</div>
+</div>
+<p>Возможно для выполнения расчета придется немного подождать, потому что использование агрегирования здесь довольно трудоемко.</p>
+<p>В результате вы получите новый атрибут со значением суммарной площади зданий в нем.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2261909729.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="599"></p>
+</figure>
+</div>
+<p>Далее аналогично предыдущему разделу вы можете рассчитать коэффициент застройки с использованием калькулятора полей.</p>
+<p>Для проверки можете сравнить между собой два результата.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2985292051.png" class="img-fluid figure-img" width="2060"></p>
+<figcaption>Слева - расчет суммарной площади зданий функцией агрегирования, справа - расчет с использованием пространственного объединения</figcaption>
+</figure>
+</div>
+<p>На самом деле здесь вы могли бы выполнить все в один этап, просто подставив в калькулятор полей вместо поля с суммарным значением площади зданий выражение агрегирования.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Дополнительно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Попробуйте самостоятельно по аналогии рассчитать коэффициент плотности застройки:</p>
+<p><span class="math display">\[
+Коэффициент\space плотности\space застройки = \dfrac{Общая\space площадь\space здания}{Площадь \space квартала}
+\]</span></p>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Сноски</h2>
+
+<ol>
+<li id="fn1"><p>Типы пространственных отношений <a href="https://fishy-bottle-aa2.notion.site/1bcf188baff3804c9c26f59995850700" class="uri">https://fishy-bottle-aa2.notion.site/1bcf188baff3804c9c26f59995850700</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026, Татьяна Балтыжакова</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
