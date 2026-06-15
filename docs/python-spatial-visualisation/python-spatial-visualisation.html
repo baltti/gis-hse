@@ -408,22 +408,6 @@ In a future release, GeoPandas will switch to using Shapely by default. If you a
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mo <span class="op">=</span> gpd.read_file(<span class="st">"https://raw.githubusercontent.com/baltti/python-spatial-itmo/main/datasets/mo.geojson"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mo.head()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="df-d2ea4672-6505-4df8-b5b5-0b1b2b224611">
-<pre><code>&lt;div class="colab-df-container"&gt;
-  &lt;div&gt;</code></pre>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 2%">
@@ -486,96 +470,11 @@ In a future release, GeoPandas will switch to using Shapely by default. If you a
 </tr>
 </tbody>
 </table>
-</div>
-<pre><code>  &lt;button class="colab-df-convert" onclick="convertToInteractive('df-d2ea4672-6505-4df8-b5b5-0b1b2b224611')"
-          title="Convert this dataframe to an interactive table."
-          style="display:none;"&gt;</code></pre>
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-<path d="M0 0h24v24H0V0z" fill="none"></path> <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
-</svg>
-<p></p>
-<style> .colab-df-container { display:flex; flex-wrap:wrap; gap: 12px; }
-
-```         
-.colab-df-convert {
-  background-color: #E8F0FE;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  fill: #1967D2;
-  height: 32px;
-  padding: 0 0 0 0;
-  width: 32px;
-}
-
-.colab-df-convert:hover {
-  background-color: #E2EBFA;
-  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-  fill: #174EA6;
-}
-
-[theme=dark] .colab-df-convert {
-  background-color: #3B4455;
-  fill: #D2E3FC;
-}
-
-[theme=dark] .colab-df-convert:hover {
-  background-color: #434B5C;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-  fill: #FFFFFF;
-}
-```
-
-</style>
-<pre><code>  &lt;script&gt;
-    const buttonEl =
-      document.querySelector('#df-d2ea4672-6505-4df8-b5b5-0b1b2b224611 button.colab-df-convert');
-    buttonEl.style.display =
-      google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-    async function convertToInteractive(key) {
-      const element = document.querySelector('#df-d2ea4672-6505-4df8-b5b5-0b1b2b224611');
-      const dataTable =
-        await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                 [key], {});
-      if (!dataTable) return;
-
-      const docLinkHtml = 'Like what you see? Visit the ' +
-        '&lt;a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
-        + ' to learn more about interactive tables.';
-      element.innerHTML = '';
-      dataTable['output_type'] = 'display_data';
-      await google.colab.output.renderOutput(dataTable, element);
-      const docLink = document.createElement('div');
-      docLink.innerHTML = docLinkHtml;
-      element.appendChild(docLink);
-    }
-  &lt;/script&gt;
-&lt;/div&gt;</code></pre>
-</section></section></main></div>
 <p>Рассчитаем плотность населения на основе данных о количества населения и площади муниципальных образований.</p>
 <p>Это нужно, чтобы мы могли сразу строить карту по относительному показателю, а не по абсолютным значениям.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"density"</span>] <span class="op">=</span> mo[<span class="st">"population"</span>]<span class="op">/</span>mo[<span class="st">"area_km2"</span>]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mo.head()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="df-1799c4cb-fb28-48d5-b6a6-92e24ae5daf0">
-<pre><code>&lt;div class="colab-df-container"&gt;
-  &lt;div&gt;</code></pre>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"density"</span>] <span class="op">=</span> mo[<span class="st">"population"</span>]<span class="op">/</span>mo[<span class="st">"area_km2"</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mo.head()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 2%">
@@ -645,79 +544,10 @@ In a future release, GeoPandas will switch to using Shapely by default. If you a
 </tr>
 </tbody>
 </table>
-</div>
-<pre><code>  &lt;button class="colab-df-convert" onclick="convertToInteractive('df-1799c4cb-fb28-48d5-b6a6-92e24ae5daf0')"
-          title="Convert this dataframe to an interactive table."
-          style="display:none;"&gt;</code></pre>
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-<path d="M0 0h24v24H0V0z" fill="none"></path> <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
-</svg>
-<p></p>
-<style> .colab-df-container { display:flex; flex-wrap:wrap; gap: 12px; }
-
-```         
-.colab-df-convert {
-  background-color: #E8F0FE;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  fill: #1967D2;
-  height: 32px;
-  padding: 0 0 0 0;
-  width: 32px;
-}
-
-.colab-df-convert:hover {
-  background-color: #E2EBFA;
-  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-  fill: #174EA6;
-}
-
-[theme=dark] .colab-df-convert {
-  background-color: #3B4455;
-  fill: #D2E3FC;
-}
-
-[theme=dark] .colab-df-convert:hover {
-  background-color: #434B5C;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-  fill: #FFFFFF;
-}
-```
-
-</style>
-<pre><code>  &lt;script&gt;
-    const buttonEl =
-      document.querySelector('#df-1799c4cb-fb28-48d5-b6a6-92e24ae5daf0 button.colab-df-convert');
-    buttonEl.style.display =
-      google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-    async function convertToInteractive(key) {
-      const element = document.querySelector('#df-1799c4cb-fb28-48d5-b6a6-92e24ae5daf0');
-      const dataTable =
-        await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                 [key], {});
-      if (!dataTable) return;
-
-      const docLinkHtml = 'Like what you see? Visit the ' +
-        '&lt;a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
-        + ' to learn more about interactive tables.';
-      element.innerHTML = '';
-      dataTable['output_type'] = 'display_data';
-      await google.colab.output.renderOutput(dataTable, element);
-      const docLink = document.createElement('div');
-      docLink.innerHTML = docLinkHtml;
-      element.appendChild(docLink);
-    }
-  &lt;/script&gt;
-&lt;/div&gt;</code></pre>
-
 <p>Далее посмотрим, как распределена интересующая нас переменная.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sn.histplot(mo[<span class="st">"density"</span>], bins<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sn.rugplot(mo[<span class="st">"density"</span>], height<span class="op">=</span><span class="fl">0.05</span>, color<span class="op">=</span><span class="st">"red"</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sn.histplot(mo[<span class="st">"density"</span>], bins<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sn.rugplot(mo[<span class="st">"density"</span>], height<span class="op">=</span><span class="fl">0.05</span>, color<span class="op">=</span><span class="st">"red"</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output_13_0.png" class="img-fluid figure-img"></p>
@@ -727,7 +557,7 @@ In a future release, GeoPandas will switch to using Shapely by default. If you a
 <p>Из графика видно, что данные немного смещены влево.</p>
 <p>Это подтверждается и статистическими показателями: так среднее значение в нашем случае больше медианного (50 % на результатах представленных ниже).</p>
 <p>Этот факт будет оказывать влияние на классификацию данных.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"density"</span>].describe()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"density"</span>].describe()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>count      110.000000
 mean      8525.548062
 std       7247.773103
@@ -737,10 +567,10 @@ min         29.098064
 75%      13535.517020
 max      30490.409539
 Name: density, dtype: float64</code></pre>
-
+</section>
 <section id="классификация" class="level2">
-<h2 data-anchor-id="классификация">Классификация</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install mapclassify</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<h2 class="anchored" data-anchor-id="классификация">Классификация</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install mapclassify</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
 Requirement already satisfied: mapclassify in /usr/local/lib/python3.9/dist-packages (2.5.0)
 Requirement already satisfied: scikit-learn in /usr/local/lib/python3.9/dist-packages (from mapclassify) (1.2.2)
@@ -753,13 +583,13 @@ Requirement already satisfied: python-dateutil&gt;=2.8.1 in /usr/local/lib/pytho
 Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3.9/dist-packages (from scikit-learn-&gt;mapclassify) (3.1.0)
 Requirement already satisfied: joblib&gt;=1.1.1 in /usr/local/lib/python3.9/dist-packages (from scikit-learn-&gt;mapclassify) (1.1.1)
 Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-packages (from python-dateutil&gt;=2.8.1-&gt;pandas&gt;=1.0-&gt;mapclassify) (1.16.0)</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mapclassify</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mapclassify</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="равные-интервалы" class="level3">
-<h3 data-anchor-id="равные-интервалы">Равные интервалы</h3>
+<h3 class="anchored" data-anchor-id="равные-интервалы">Равные интервалы</h3>
 <p>Один из самых простых видов классификации, который заключается в том, что весь интервал разбивается на нужное количество равных отрезков.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>equal_interval <span class="op">=</span> mapclassify.EqualInterval(mo[<span class="st">"density"</span>], k<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>equal_interval</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>equal_interval <span class="op">=</span> mapclassify.EqualInterval(mo[<span class="st">"density"</span>], k<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>equal_interval</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>EqualInterval
 
       Interval         Count
@@ -771,11 +601,11 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 (24398.15, 30490.41] |     4</code></pre>
 </section>
 <section id="квантили" class="level3">
-<h3 data-anchor-id="квантили">Квантили</h3>
+<h3 class="anchored" data-anchor-id="квантили">Квантили</h3>
 <p>При использовании такой классификации объекты разбиваются на группы так, чтобы в каждой группе было одинаковое число объектов.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>quantiles <span class="op">=</span> mapclassify.Quantiles(mo[<span class="st">"density"</span>], k<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>quantiles</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>quantiles <span class="op">=</span> mapclassify.Quantiles(mo[<span class="st">"density"</span>], k<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>quantiles</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>Quantiles
 
       Interval         Count
@@ -786,17 +616,17 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 ( 9696.38, 15109.12] |    22
 (15109.12, 30490.41] |    22</code></pre>
 <p>Сравним размер интервалов для каждой группы.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>quantiles.bins[<span class="dv">1</span>:] <span class="op">-</span> quantiles.bins[:<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>quantiles.bins[<span class="dv">1</span>:] <span class="op">-</span> quantiles.bins[:<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>array([ 4064.67975865,  4605.2092192 ,  5412.73243451, 15381.29378797])</code></pre>
 <p>Главная сложность в использовании такого метода классификации в том, что размер интервалов может быть очень разным, что приводит к сложности интерпретации результатов.</p>
 </section>
 <section id="стандартное-отклонение" class="level3">
-<h3 data-anchor-id="стандартное-отклонение">Стандартное отклонение</h3>
+<h3 class="anchored" data-anchor-id="стандартное-отклонение">Стандартное отклонение</h3>
 <p>В этом случае классы рассчитываются по величине стандартного отклонения относительно медианы.</p>
 <p>Например, в нашем случае при использовании 5 интервалов мы получим интервалы <span class="math inline">\(\left(\overline{x}-2s\right)\)</span>, <span class="math inline">\(\left(\overline{x}-s\right)\)</span>, <span class="math inline">\(\left(\overline{x}+s\right)\)</span>, <span class="math inline">\(\left(\overline{x}+2s\right)\)</span>. Все, что не попало в эти интервалы будет отнесено в нижний или верхний интервал соответственно.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>stand_dev <span class="op">=</span> mapclassify.StdMean(mo[<span class="st">"density"</span>])</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>stand_dev</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>stand_dev <span class="op">=</span> mapclassify.StdMean(mo[<span class="st">"density"</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>stand_dev</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>StdMean
 
       Interval         Count
@@ -809,12 +639,12 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 <p>Такую классификацию хорошо использовать, если данные нормально распределены.</p>
 </section>
 <section id="естественные-интервалы-класификация-фишера-дженкса" class="level3">
-<h3 data-anchor-id="естественные-интервалы-класификация-фишера-дженкса">Естественные интервалы (класификация Фишера-Дженкса)</h3>
+<h3 class="anchored" data-anchor-id="естественные-интервалы-класификация-фишера-дженкса">Естественные интервалы (класификация Фишера-Дженкса)</h3>
 <p>Эта классификация считается одной из оптимальных.</p>
 <p>Метод построен на том, что внутри классов минимизируются суммы отклонений от медиан классов.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fisher_jenks <span class="op">=</span> mapclassify.FisherJenks(mo[<span class="st">"density"</span>], k<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fisher_jenks</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fisher_jenks <span class="op">=</span> mapclassify.FisherJenks(mo[<span class="st">"density"</span>], k<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>fisher_jenks</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>FisherJenks
 
       Interval         Count
@@ -826,26 +656,26 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 (20552.12, 30490.41] |     4</code></pre>
 </section>
 <section id="сравнение-результатов-классификации" class="level3">
-<h3 data-anchor-id="сравнение-результатов-классификации">Сравнение результатов классификации</h3>
+<h3 class="anchored" data-anchor-id="сравнение-результатов-классификации">Сравнение результатов классификации</h3>
 <p>Проанализируем разницу между группами, полученную различными методами классификации. Для этого сравним абсолютные отклонения внутри классов от их медиан (absolute deviation around class medians - ADCM). Это позволит увидеть, насколько полученные группы “компактны”.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bunch classifier objects</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>class5 <span class="op">=</span> equal_interval, quantiles, stand_dev, fisher_jenks</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Collect ADCM for each classifier</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>fits <span class="op">=</span> numpy.array([c.adcm <span class="cf">for</span> c <span class="kw">in</span> class5])</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert ADCM scores to a DataFrame</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>adcms <span class="op">=</span> pd.DataFrame(fits)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add classifier names</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>adcms[<span class="st">"classifier"</span>] <span class="op">=</span> [c.name <span class="cf">for</span> c <span class="kw">in</span> class5]</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column names to the ADCM</span></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>adcms.columns <span class="op">=</span> [<span class="st">"ADCM"</span>, <span class="st">"Classifier"</span>]</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sn.barplot(y<span class="op">=</span><span class="st">"Classifier"</span>, </span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>                x<span class="op">=</span><span class="st">"ADCM"</span>, </span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>                data<span class="op">=</span>adcms, </span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span><span class="st">"Pastel1"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bunch classifier objects</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>class5 <span class="op">=</span> equal_interval, quantiles, stand_dev, fisher_jenks</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Collect ADCM for each classifier</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>fits <span class="op">=</span> numpy.array([c.adcm <span class="cf">for</span> c <span class="kw">in</span> class5])</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert ADCM scores to a DataFrame</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>adcms <span class="op">=</span> pd.DataFrame(fits)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add classifier names</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>adcms[<span class="st">"classifier"</span>] <span class="op">=</span> [c.name <span class="cf">for</span> c <span class="kw">in</span> class5]</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column names to the ADCM</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>adcms.columns <span class="op">=</span> [<span class="st">"ADCM"</span>, <span class="st">"Classifier"</span>]</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sn.barplot(y<span class="op">=</span><span class="st">"Classifier"</span>, </span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>                x<span class="op">=</span><span class="st">"ADCM"</span>, </span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>                data<span class="op">=</span>adcms, </span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span><span class="st">"Pastel1"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output_30_0.png" class="img-fluid figure-img"></p>
@@ -855,29 +685,29 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 <p>Чем меньше полученное значение, тем более компактными являются группы, тем лучше полученная классификация.</p>
 <p>Кроме сравнения компактности классов, еще интересно посмотреть, к какому классу были отнесены одни и те же объекты при использовании различных методов.</p>
 <p>Добавим номера классов в отдельные колонки нашего датасета.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Quantiles"</span>] <span class="op">=</span> quantiles.yb</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Equal Interval"</span>] <span class="op">=</span> equal_interval.yb</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Mean-Standard Deviation"</span>] <span class="op">=</span> stand_dev.yb</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Fisher-Jenks"</span>] <span class="op">=</span> fisher_jenks.yb</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Quantiles"</span>] <span class="op">=</span> quantiles.yb</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Equal Interval"</span>] <span class="op">=</span> equal_interval.yb</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Mean-Standard Deviation"</span>] <span class="op">=</span> stand_dev.yb</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>mo[<span class="st">"Fisher-Jenks"</span>] <span class="op">=</span> fisher_jenks.yb</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Отобразим полученные результаты на тепловой карте.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>f, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>))</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sn.heatmap(</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>           mo.set_index(<span class="st">"NAME"</span>)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>           .sort_values(<span class="st">"density"</span>)[</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                            [</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Fisher-Jenks"</span>,</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Equal Interval"</span>,</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Quantiles"</span>,</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Mean-Standard Deviation"</span>,</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>                            ]</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                           ]</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>            .T,</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>            cmap<span class="op">=</span><span class="st">"YlGn"</span>,</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>            cbar<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax,</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Муниципальный округ"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>f, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>sn.heatmap(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>           mo.set_index(<span class="st">"NAME"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>           .sort_values(<span class="st">"density"</span>)[</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                            [</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Fisher-Jenks"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Equal Interval"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Quantiles"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Mean-Standard Deviation"</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>                            ]</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>                           ]</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>            .T,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>            cmap<span class="op">=</span><span class="st">"YlGn"</span>,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>            cbar<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax,</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>           )</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Муниципальный округ"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>Text(0.5, 23.96875, 'Муниципальный округ')</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -887,26 +717,10 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 </div>
 <p>На полученном графике методы классификации представлены по строкам, а объекты - по столбцам. Цвет зависит от группы, в которую объект был отнесен.</p>
 <p>Также сравним, сколько объектов было отнесено к той или иной группе в различных методах классификации.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>             {c.name: c.counts <span class="cf">for</span> c <span class="kw">in</span> class5},</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>             index<span class="op">=</span>[<span class="st">"Class-</span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)],</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="df-8e8d0187-ee7d-44c4-82e1-5f67b72d4058">
-<pre><code>&lt;div class="colab-df-container"&gt;
-  &lt;div&gt;</code></pre>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>             {c.name: c.counts <span class="cf">for</span> c <span class="kw">in</span> class5},</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>             index<span class="op">=</span>[<span class="st">"Class-</span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)],</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 13%">
@@ -962,88 +776,19 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 </tr>
 </tbody>
 </table>
-</div>
-<pre><code>  &lt;button class="colab-df-convert" onclick="convertToInteractive('df-8e8d0187-ee7d-44c4-82e1-5f67b72d4058')"
-          title="Convert this dataframe to an interactive table."
-          style="display:none;"&gt;</code></pre>
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-<path d="M0 0h24v24H0V0z" fill="none"></path> <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
-</svg>
-<p></p>
-<style> .colab-df-container { display:flex; flex-wrap:wrap; gap: 12px; }
-
-```         
-.colab-df-convert {
-  background-color: #E8F0FE;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  fill: #1967D2;
-  height: 32px;
-  padding: 0 0 0 0;
-  width: 32px;
-}
-
-.colab-df-convert:hover {
-  background-color: #E2EBFA;
-  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-  fill: #174EA6;
-}
-
-[theme=dark] .colab-df-convert {
-  background-color: #3B4455;
-  fill: #D2E3FC;
-}
-
-[theme=dark] .colab-df-convert:hover {
-  background-color: #434B5C;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-  fill: #FFFFFF;
-}
-```
-
-</style>
-<pre><code>  &lt;script&gt;
-    const buttonEl =
-      document.querySelector('#df-8e8d0187-ee7d-44c4-82e1-5f67b72d4058 button.colab-df-convert');
-    buttonEl.style.display =
-      google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-    async function convertToInteractive(key) {
-      const element = document.querySelector('#df-8e8d0187-ee7d-44c4-82e1-5f67b72d4058');
-      const dataTable =
-        await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                 [key], {});
-      if (!dataTable) return;
-
-      const docLinkHtml = 'Like what you see? Visit the ' +
-        '&lt;a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
-        + ' to learn more about interactive tables.';
-      element.innerHTML = '';
-      dataTable['output_type'] = 'display_data';
-      await google.colab.output.renderOutput(dataTable, element);
-      const docLink = document.createElement('div');
-      docLink.innerHTML = docLinkHtml;
-      element.appendChild(docLink);
-    }
-  &lt;/script&gt;
-&lt;/div&gt;</code></pre>
-
 </section>
 </section>
 <section id="построение-карты" class="level2">
-<h2 data-anchor-id="построение-карты">Построение карты</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.plot(</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>             column<span class="op">=</span><span class="st">"density"</span>,  <span class="co"># Data to plot</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>             scheme<span class="op">=</span><span class="st">"Quantiles"</span>,  <span class="co"># Classification scheme</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>             cmap<span class="op">=</span><span class="st">"YlGn"</span>,  <span class="co"># Color palette</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span><span class="va">True</span>,  <span class="co"># Add legend</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>             legend_kwds<span class="op">=</span>{<span class="st">"fmt"</span>: <span class="st">"</span><span class="sc">{:.0f}</span><span class="st">"</span>},  <span class="co"># Remove decimals in legend</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>             figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>)</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<h2 class="anchored" data-anchor-id="построение-карты">Построение карты</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.plot(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>             column<span class="op">=</span><span class="st">"density"</span>,  <span class="co"># Data to plot</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>             scheme<span class="op">=</span><span class="st">"Quantiles"</span>,  <span class="co"># Classification scheme</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>             cmap<span class="op">=</span><span class="st">"YlGn"</span>,  <span class="co"># Color palette</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span><span class="va">True</span>,  <span class="co"># Add legend</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>             legend_kwds<span class="op">=</span>{<span class="st">"fmt"</span>: <span class="st">"</span><span class="sc">{:.0f}</span><span class="st">"</span>},  <span class="co"># Remove decimals in legend</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>             figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output_38_0.png" class="img-fluid figure-img"></p>
@@ -1056,17 +801,17 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 <p>Последовательные палитры - градиенты, которые рекомендуется использовать для непрерывных числовых данных. Они позволяют довольно однозначное трактование таких значений.</p>
 <p>Так, например, на рисунке выше муниципальные образования с низкой плотностью населения показаны светлыми оттенками палитры, а с высокой - темными.</p>
 <p>Такие палитры также могут быть и оттенками одного цвета.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.plot(</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>             column<span class="op">=</span><span class="st">"density"</span>,  <span class="co"># Data to plot</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>             scheme<span class="op">=</span><span class="st">"Quantiles"</span>,  <span class="co"># Classification scheme</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>             cmap<span class="op">=</span><span class="st">"Blues"</span>,  <span class="co"># Color palette</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>             edgecolor<span class="op">=</span><span class="st">"k"</span>,  <span class="co"># Borderline color</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>             linewidth<span class="op">=</span><span class="fl">0.1</span>,  <span class="co"># Borderline width</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span><span class="va">True</span>,  <span class="co"># Add legend</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>             legend_kwds<span class="op">=</span>{<span class="st">"fmt"</span>: <span class="st">"</span><span class="sc">{:.0f}</span><span class="st">"</span>},  <span class="co"># Remove decimals in legend</span></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>             figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>)</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.plot(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>             column<span class="op">=</span><span class="st">"density"</span>,  <span class="co"># Data to plot</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>             scheme<span class="op">=</span><span class="st">"Quantiles"</span>,  <span class="co"># Classification scheme</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>             cmap<span class="op">=</span><span class="st">"Blues"</span>,  <span class="co"># Color palette</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>             edgecolor<span class="op">=</span><span class="st">"k"</span>,  <span class="co"># Borderline color</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>             linewidth<span class="op">=</span><span class="fl">0.1</span>,  <span class="co"># Borderline width</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span><span class="va">True</span>,  <span class="co"># Add legend</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>             legend_kwds<span class="op">=</span>{<span class="st">"fmt"</span>: <span class="st">"</span><span class="sc">{:.0f}</span><span class="st">"</span>},  <span class="co"># Remove decimals in legend</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>             figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output_40_0.png" class="img-fluid figure-img"></p>
@@ -1074,9 +819,9 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 </figure>
 </div>
 <p>Качественные палитры рекомендуется использовать для качественных или дискретных переменных, так как они акцентируют внимание на разнице между группами объектов.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.plot(<span class="st">"ADMIN_L5"</span>, categorical<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>))</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.plot(<span class="st">"ADMIN_L5"</span>, categorical<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>             legend<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()<span class="op">;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output_42_0.png" class="img-fluid figure-img"></p>
@@ -1085,21 +830,21 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 </div>
 <p>Расходящиеся цветовые палитры тоже подходят для непрерывных числовых данных, но у них есть определенная особенность: в таких палитрах акцентируется внимание на середине всего распределения чисел и минимальными с максимальными значениями.</p>
 <p>Например, такие палитры часто используются для температур, когда нужно показать положительные и отрицательные значения, а также ноль.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install contextily</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily <span class="im">as</span> cx</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot polygons</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.boundary.plot(edgecolor<span class="op">=</span><span class="st">"red"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>))</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add basemap</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>cx.add_basemap(</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>               ax, crs<span class="op">=</span>mo.crs, source<span class="op">=</span>cx.providers.CartoDB.Voyager</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>              )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install contextily</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily <span class="im">as</span> cx</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot polygons</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> mo.boundary.plot(edgecolor<span class="op">=</span><span class="st">"red"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">15</span>))</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add basemap</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>cx.add_basemap(</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>               ax, crs<span class="op">=</span>mo.crs, source<span class="op">=</span>cx.providers.CartoDB.Voyager</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>              )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output_46_0.png" class="img-fluid figure-img"></p>
 <figcaption>png</figcaption>
 </figure>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mo.explore()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mo.explore()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div style="width:100%;">
 <div style="position:relative;width:100%;height:0;padding-bottom:60%;">
 <p><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
@@ -1272,14 +1017,14 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 </html>" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""></iframe></p>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>mo.explore(</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>     column<span class="op">=</span><span class="st">"ADMIN_L5"</span>, <span class="co"># make choropleth based on "BoroName" column</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>     tooltip<span class="op">=</span><span class="st">"NAME"</span>, <span class="co"># show "BoroName" value in tooltip (on hover)</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>     popup<span class="op">=</span><span class="va">True</span>, <span class="co"># show all values in popup (on click)</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>     tiles<span class="op">=</span><span class="st">"CartoDB positron"</span>, <span class="co"># use "CartoDB positron" tiles</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>     cmap<span class="op">=</span><span class="st">"Set1"</span>, <span class="co"># use "Set1" matplotlib colormap</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>     style_kwds<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>) <span class="co"># use black outline</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mo.explore(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>     column<span class="op">=</span><span class="st">"ADMIN_L5"</span>, <span class="co"># make choropleth based on "BoroName" column</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>     tooltip<span class="op">=</span><span class="st">"NAME"</span>, <span class="co"># show "BoroName" value in tooltip (on hover)</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>     popup<span class="op">=</span><span class="va">True</span>, <span class="co"># show all values in popup (on click)</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>     tiles<span class="op">=</span><span class="st">"CartoDB positron"</span>, <span class="co"># use "CartoDB positron" tiles</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>     cmap<span class="op">=</span><span class="st">"Set1"</span>, <span class="co"># use "Set1" matplotlib colormap</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>     style_kwds<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>) <span class="co"># use black outline</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div style="width:100%;">
 <div style="position:relative;width:100%;height:0;padding-bottom:60%;">
 <p><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
@@ -1597,15 +1342,15 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 </html>" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""></iframe></p>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mo.explore(</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>     column<span class="op">=</span><span class="st">"density"</span>, <span class="co"># make choropleth based on "BoroName" column</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>     scheme<span class="op">=</span><span class="st">"fisherjenks"</span>,</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>     cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>     tooltip<span class="op">=</span>(<span class="st">"NAME"</span>, <span class="st">"population"</span>, <span class="st">"density"</span>), <span class="co"># show "BoroName" value in tooltip (on hover)</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>     popup<span class="op">=</span><span class="va">True</span>, <span class="co"># show all values in popup (on click)</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>     tiles<span class="op">=</span><span class="st">"CartoDB positron"</span>, <span class="co"># use "CartoDB positron" tiles</span></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>     style_kwds<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>) <span class="co"># use black outline</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mo.explore(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>     column<span class="op">=</span><span class="st">"density"</span>, <span class="co"># make choropleth based on "BoroName" column</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>     scheme<span class="op">=</span><span class="st">"fisherjenks"</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>     cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>     tooltip<span class="op">=</span>(<span class="st">"NAME"</span>, <span class="st">"population"</span>, <span class="st">"density"</span>), <span class="co"># show "BoroName" value in tooltip (on hover)</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>     popup<span class="op">=</span><span class="va">True</span>, <span class="co"># show all values in popup (on click)</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>     tiles<span class="op">=</span><span class="st">"CartoDB positron"</span>, <span class="co"># use "CartoDB positron" tiles</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>     style_kwds<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>) <span class="co"># use black outline</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div style="width:100%;">
 <div style="position:relative;width:100%;height:0;padding-bottom:60%;">
 <p><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
@@ -1877,7 +1622,7 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-pack
 </html>" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""></iframe></p>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install folium</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install folium</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
 Requirement already satisfied: folium in /usr/local/lib/python3.9/dist-packages (0.14.0)
 Requirement already satisfied: requests in /usr/local/lib/python3.9/dist-packages (from folium) (2.27.1)
@@ -1889,21 +1634,21 @@ Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/pyt
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.9/dist-packages (from requests-&gt;folium) (2022.12.7)
 Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.9/dist-packages (from requests-&gt;folium) (2.0.12)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.9/dist-packages (from requests-&gt;folium) (3.4)</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> mo.explore(</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>     column<span class="op">=</span><span class="st">"density"</span>, <span class="co"># make choropleth based on "BoroName" column</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>     scheme<span class="op">=</span><span class="st">"fisherjenks"</span>,</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>     cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>     tooltip<span class="op">=</span>(<span class="st">"NAME"</span>, <span class="st">"population"</span>, <span class="st">"density"</span>), <span class="co"># show "BoroName" value in tooltip (on hover)</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>     popup<span class="op">=</span><span class="va">True</span>, <span class="co"># show all values in popup (on click)</span></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>     style_kwds<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>) <span class="co"># use black outline</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(<span class="st">'Stamen Toner'</span>, control<span class="op">=</span><span class="va">True</span>).add_to(m)  <span class="co"># use folium to add alternative tiles</span></span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>folium.LayerControl().add_to(m)  <span class="co"># use folium to add layer control</span></span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>m  <span class="co"># show map</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> mo.explore(</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>     column<span class="op">=</span><span class="st">"density"</span>, <span class="co"># make choropleth based on "BoroName" column</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>     scheme<span class="op">=</span><span class="st">"fisherjenks"</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>     cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>     tooltip<span class="op">=</span>(<span class="st">"NAME"</span>, <span class="st">"population"</span>, <span class="st">"density"</span>), <span class="co"># show "BoroName" value in tooltip (on hover)</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>     popup<span class="op">=</span><span class="va">True</span>, <span class="co"># show all values in popup (on click)</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>     style_kwds<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>) <span class="co"># use black outline</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(<span class="st">'Stamen Toner'</span>, control<span class="op">=</span><span class="va">True</span>).add_to(m)  <span class="co"># use folium to add alternative tiles</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>folium.LayerControl().add_to(m)  <span class="co"># use folium to add layer control</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>m  <span class="co"># show map</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div style="width:100%;">
 <div style="position:relative;width:100%;height:0;padding-bottom:60%;">
 <p><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
@@ -2202,9 +1947,9 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.9/di
 
 
 </section>
+</section>
 
-
- <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -2605,7 +2350,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.9/di
     }
   });
   </script>
- <!-- /content -->
+</div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
