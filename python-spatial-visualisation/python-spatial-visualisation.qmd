@@ -1,6 +1,6 @@
 # Картограммы (choropleth)
 
-При создании такого типа карт, цветом или штриховкой будет отображаться значение рассматриваемой переменной. Примеры можно посмотреть [здесь](https://baltti.github.io/gis-itmo/visualisation.html#%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0-choropleth).
+При создании такого типа карт, цветом или штриховкой будет отображаться значение рассматриваемой переменной.
 
 Главная рекомендация при их построении состоит в том, что следует использовать **относительные показатели переменных, а не абсолютные.**
 
@@ -88,7 +88,6 @@ mo.head()
 +---+--------------------------+----------------------+------------+----------+---------------------------------------------------+
 
 
-
 Рассчитаем плотность населения на основе данных о количества населения и площади муниципальных образований.
 
 Это нужно, чтобы мы могли сразу строить карту по относительному показателю, а не по абсолютным значениям.
@@ -148,7 +147,9 @@ max      30490.409539
 Name: density, dtype: float64
 ```
 
-## Классификация
+## Классификация количественной переменной
+
+Немного подробнее про классификацию числовых переменных можно почитать по [ссылке](https://baltti.github.io/gis-hse/thematic%20mapping.html#%D1%84%D0%BE%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0)
 
 ``` python
 # pip install mapclassify
@@ -284,19 +285,19 @@ FisherJenks
 Проанализируем разницу между группами, полученную различными методами классификации. Для этого сравним абсолютные отклонения внутри классов от их медиан (absolute deviation around class medians - ADCM). Это позволит увидеть, насколько полученные группы "компактны".
 
 ``` python
-# Bunch classifier objects
+# список типов классификации
 class5 = equal_interval, quantiles, stand_dev, fisher_jenks
 
-# Collect ADCM for each classifier
+# сбор абсолютных отклонений внутри классов от медиан для каждой классификации
 fits = numpy.array([c.adcm for c in class5])
 
-# Convert ADCM scores to a DataFrame
+# перенос значений абсолютных отклонений в датафрейм
 adcms = pd.DataFrame(fits)
 
-# Add classifier names
+# добавление названий
 adcms["classifier"] = [c.name for c in class5]
 
-# Add column names to the ADCM
+# добавление названий к датафрейму
 adcms.columns = ["ADCM", "Classifier"]
 ax = sn.barplot(y="Classifier", 
                 x="ADCM", 
@@ -327,7 +328,7 @@ sn.heatmap(
            mo.set_index("NAME")
            .sort_values("density")[
                             [
-                             "Fisher-Jenks",
+                             "Фишер-Дженкс",
                              "Equal Interval",
                              "Quantiles",
                              "Mean-Standard Deviation",
@@ -381,11 +382,11 @@ pd.DataFrame(
 
 ``` python
 ax = mo.plot(
-             column="density",  # Data to plot
-             scheme="Quantiles",  # Classification scheme
-             cmap="YlGn",  # Color palette
-             legend=True,  # Add legend
-             legend_kwds={"fmt": "{:.0f}"},  # Remove decimals in legend
+             column="density",  # переменная для карты 
+             scheme="Quantiles",  # тип классификации
+             cmap="YlGn",  # цветовая палитра
+             legend=True,  # добавление легенды
+             legend_kwds={"fmt": "{:.0f}"},  # форматирование чисел в легенде
              figsize=(10, 15)
             )
 ax.set_axis_off();
@@ -407,13 +408,13 @@ ax.set_axis_off();
 
 ``` python
 ax = mo.plot(
-             column="density",  # Data to plot
-             scheme="Quantiles",  # Classification scheme
-             cmap="Blues",  # Color palette
-             edgecolor="k",  # Borderline color
-             linewidth=0.1,  # Borderline width
-             legend=True,  # Add legend
-             legend_kwds={"fmt": "{:.0f}"},  # Remove decimals in legend
+             column="density",  # переменная для классификации
+             scheme="Quantiles",  # тип классификации
+             cmap="Blues",  # цветовая палитра
+             edgecolor="k",  # цвет границ
+             linewidth=0.1,  # толщина границ
+             legend=True,  # добавление легенды
+             legend_kwds={"fmt": "{:.0f}"},  # форматирование чисел в легенде
              figsize=(10, 15)
             )
 ax.set_axis_off();
