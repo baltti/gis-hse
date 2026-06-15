@@ -38,7 +38,12 @@ website:
         - spatial.qmd
         - style.qmd
         - thematic mapping.qmd
-     #   - layout.qmd
+        - layout.qmd
+        - section: Использование python
+          contents:
+             - 'python-spatial-basic/python-spatial-basic.qmd'
+             - 'python-spatial-visualisation/python-spatial-visualisation.qmd'
+
 
 
 
